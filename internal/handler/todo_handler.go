@@ -30,3 +30,15 @@ func (h *TodoHandler) Create() gin.HandlerFunc {
 		c.Status(201)
 	}
 }
+
+func (h *TodoHandler) ReadAll() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		todos, err := h.s.ReadAll()
+		if err != nil {
+			c.JSON(500, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(200, todos)
+	}
+}

@@ -29,6 +29,7 @@ func main() {
 	todoHandler := handler.NewTodoHandler(todoService)
 
 	r.POST("/todos", todoHandler.Create())
+	r.GET("/todos", todoHandler.ReadAll())
 
 	r.Run(":8080")
 }

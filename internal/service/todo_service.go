@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/entity"
 	"github.com/gdgc-ub/web-todolist-backend-informal/internal/repository"
 	"log"
 )
@@ -21,4 +22,14 @@ func (s *TodoService) Create(title string) error {
 	}
 
 	return nil
+}
+
+func (s *TodoService) ReadAll() ([]*entity.Todo, error) {
+	todos, err := s.r.ReadAll()
+	if err != nil {
+		log.Println("Error reading todos: ", err)
+		return nil, errors.New("something went wrong")
+	}
+
+	return todos, nil
 }
