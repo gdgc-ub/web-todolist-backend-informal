@@ -1,7 +1,6 @@
 package service
 
 import (
-	"errors"
 	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/dto"
 	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/entity"
 	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/repository"
@@ -20,7 +19,7 @@ func NewTodoService(r *repository.TodoRepository) *TodoService {
 func (s *TodoService) Create(title string) error {
 	if err := s.r.Create(title); err != nil {
 		log.Println("Error creating todo: ", err)
-		return errors.New("something went wrong")
+		return response.NewErrorResponse(500, "something went wrong")
 	}
 
 	return nil
@@ -30,7 +29,7 @@ func (s *TodoService) ReadAll() ([]*entity.Todo, error) {
 	todos, err := s.r.ReadAll()
 	if err != nil {
 		log.Println("Error reading todos: ", err)
-		return nil, errors.New("something went wrong")
+		return nil, response.NewErrorResponse(500, "something went wrong")
 	}
 
 	return todos, nil

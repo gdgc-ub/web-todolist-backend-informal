@@ -25,7 +25,9 @@ func (h *TodoHandler) Create() gin.HandlerFunc {
 		}
 
 		if err := h.s.Create(req.Title); err != nil {
-			c.JSON(500, gin.H{"error": err.Error()})
+			var errResp *response.ErrorResponse
+			errors.As(err, &errResp)
+			c.JSON(errResp.Code, errResp)
 			return
 		}
 
@@ -37,7 +39,9 @@ func (h *TodoHandler) ReadAll() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		todos, err := h.s.ReadAll()
 		if err != nil {
-			c.JSON(500, gin.H{"error": err.Error()})
+			var errResp *response.ErrorResponse
+			errors.As(err, &errResp)
+			c.JSON(errResp.Code, errResp)
 			return
 		}
 
