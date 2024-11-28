@@ -93,3 +93,22 @@ func (h *TodoHandler) Update() gin.HandlerFunc {
 		c.Status(http.StatusNoContent)
 	}
 }
+
+func (h *TodoHandler) Delete() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var req dto.TodoByIDRequest
+		if err := c.ShouldBindUri(&req); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		if err := h.s.Delete(req); err != nil {
+			var errResp *response.ErrorResponse
+			errors.As(err, &errResp)
+			c.JSON(errResp.Code, errResp)
+			return
+		}
+
+		c.Status(http.StatusNoContent)
+	}
+}

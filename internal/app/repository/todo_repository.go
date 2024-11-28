@@ -38,3 +38,7 @@ func (r *TodoRepository) ReadByID(id uint) (*entity.Todo, error) {
 func (r *TodoRepository) Update(newTodo *entity.Todo) error {
 	return r.db.Select("*").Updates(newTodo).Error
 }
+
+func (r *TodoRepository) Delete(id uint) error {
+	return r.db.Delete(&entity.Todo{}, id).Error
+}

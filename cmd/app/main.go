@@ -32,6 +32,7 @@ func main() {
 	r.GET("/todos", todoHandler.ReadAll())
 	r.GET("/todos/:id", todoHandler.ReadByID())
 	r.PUT("/todos/:id", todoHandler.Update())
+	r.DELETE("/todos/:id", todoHandler.Delete())
 
 	r.Run(":8080")
 }

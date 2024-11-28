@@ -68,3 +68,16 @@ func (s *TodoService) Update(req dto.UpdateTodoRequest) error {
 
 	return nil
 }
+
+func (s *TodoService) Delete(req dto.TodoByIDRequest) error {
+	if _, err := s.ReadByID(dto.TodoByIDRequest{ID: req.ID}); err != nil {
+		return err
+	}
+
+	if err := s.r.Delete(req.ID); err != nil {
+		log.Println("Error deleting todo: ", err)
+		return response.NewErrorResponse(http.StatusInternalServerError, "something went wrong")
+	}
+
+	return nil
+}
