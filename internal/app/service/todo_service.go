@@ -2,8 +2,10 @@ package service
 
 import (
 	"errors"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/dto"
 	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/entity"
 	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/repository"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/pkg/response"
 	"log"
 )
 
@@ -32,4 +34,18 @@ func (s *TodoService) ReadAll() ([]*entity.Todo, error) {
 	}
 
 	return todos, nil
+}
+
+func (s *TodoService) ReadByID(req dto.ReadTodoByIDRequest) (*entity.Todo, error) {
+	todo, err := s.r.ReadByID(req.ID)
+	if err != nil {
+		if err.Error() == "record not found" {
+			return nil, response.NewErrorResponse(404, "todo not found")
+		}
+
+		log.Println("Error reading todo: ", err)
+		return nil, response.NewErrorResponse(500, "something went wrong")
+	}
+
+	return todo, nil
 }

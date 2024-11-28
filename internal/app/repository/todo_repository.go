@@ -25,3 +25,12 @@ func (r *TodoRepository) ReadAll() ([]*entity.Todo, error) {
 
 	return todos, nil
 }
+
+func (r *TodoRepository) ReadByID(id uint) (*entity.Todo, error) {
+	var todo entity.Todo
+	if err := r.db.First(&todo, id).Error; err != nil {
+		return nil, err
+	}
+
+	return &todo, nil
+}

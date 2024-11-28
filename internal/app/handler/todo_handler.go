@@ -1,8 +1,10 @@
 package handler
 
 import (
+	"errors"
 	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/dto"
 	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/service"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/pkg/response"
 	"github.com/gin-gonic/gin"
 )
 
@@ -40,5 +42,25 @@ func (h *TodoHandler) ReadAll() gin.HandlerFunc {
 		}
 
 		c.JSON(200, todos)
+	}
+}
+
+func (h *TodoHandler) ReadByID() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var req dto.ReadTodoByIDRequest
+		if err := c.ShouldBindUri(&req); err != nil {
+			c.JSON(400, gin.H{"error": err.Error()})
+			return
+		}
+
+		todo, err := h.s.ReadByID(req)
+		if err != nil {
+			var errResp *response.ErrorResponse
+			errors.As(err, &errResp)
+			c.JSON(errResp.Code, errResp)
+			return
+		}
+
+		c.JSON(200, todo)
 	}
 }

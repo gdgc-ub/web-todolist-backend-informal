@@ -30,6 +30,7 @@ func main() {
 
 	r.POST("/todos", todoHandler.Create())
 	r.GET("/todos", todoHandler.ReadAll())
+	r.GET("/todos/:id", todoHandler.ReadByID())
 
 	r.Run(":8080")
 }
