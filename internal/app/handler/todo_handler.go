@@ -54,7 +54,7 @@ func (h *TodoHandler) ReadByID() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var req dto.TodoByIDRequest
 		if err := c.ShouldBindUri(&req); err != nil {
-			c.JSON(400, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
@@ -74,12 +74,12 @@ func (h *TodoHandler) Update() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var req dto.UpdateTodoRequest
 		if err := c.ShouldBindUri(&req); err != nil {
-			c.JSON(400, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
 		if err := c.ShouldBindJSON(&req); err != nil {
-			c.JSON(400, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
