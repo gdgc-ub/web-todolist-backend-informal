@@ -28,11 +28,13 @@ func main() {
 	todoService := service.NewTodoService(todoRepository)
 	todoHandler := handler.NewTodoHandler(todoService)
 
-	r.POST("/todos", todoHandler.Create())
-	r.GET("/todos", todoHandler.ReadAll())
-	r.GET("/todos/:id", todoHandler.ReadByID())
-	r.PUT("/todos/:id", todoHandler.Update())
-	r.DELETE("/todos/:id", todoHandler.Delete())
+	v1 := r.Group("/v1")
+
+	v1.POST("/todos", todoHandler.Create())
+	v1.GET("/todos", todoHandler.ReadAll())
+	v1.GET("/todos/:id", todoHandler.ReadByID())
+	v1.PUT("/todos/:id", todoHandler.Update())
+	v1.DELETE("/todos/:id", todoHandler.Delete())
 
 	r.Run(":8080")
 }
