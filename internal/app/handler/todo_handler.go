@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/gdgc-ub/web-todolist-backend-informal/internal/dto"
-	"github.com/gdgc-ub/web-todolist-backend-informal/internal/service"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/dto"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/service"
 	"github.com/gin-gonic/gin"
 )
 

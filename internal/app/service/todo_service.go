@@ -2,8 +2,8 @@ package service
 
 import (
 	"errors"
-	"github.com/gdgc-ub/web-todolist-backend-informal/internal/entity"
-	"github.com/gdgc-ub/web-todolist-backend-informal/internal/repository"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/entity"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/repository"
 	"log"
 )
 

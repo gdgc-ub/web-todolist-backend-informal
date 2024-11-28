@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"github.com/gdgc-ub/web-todolist-backend-informal/internal/entity"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/entity"
 	"gorm.io/gorm"
 )
 

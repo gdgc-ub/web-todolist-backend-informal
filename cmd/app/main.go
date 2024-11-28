@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/gdgc-ub/web-todolist-backend-informal/internal/database"
-	"github.com/gdgc-ub/web-todolist-backend-informal/internal/handler"
-	"github.com/gdgc-ub/web-todolist-backend-informal/internal/repository"
-	"github.com/gdgc-ub/web-todolist-backend-informal/internal/service"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/handler"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/repository"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/service"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/pkg/database"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"log"

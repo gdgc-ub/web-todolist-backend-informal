@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"github.com/gdgc-ub/web-todolist-backend-informal/internal/entity"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/entity"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
