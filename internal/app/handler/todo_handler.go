@@ -6,6 +6,7 @@ import (
 	"github.com/gdgc-ub/web-todolist-backend-informal/internal/app/service"
 	"github.com/gdgc-ub/web-todolist-backend-informal/internal/pkg/response"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 type TodoHandler struct {
@@ -20,7 +21,7 @@ func (h *TodoHandler) Create() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var req dto.CreateTodoRequest
 		if err := c.ShouldBindJSON(&req); err != nil {
-			c.JSON(400, gin.H{"error": err.Error()})
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
 
@@ -31,7 +32,7 @@ func (h *TodoHandler) Create() gin.HandlerFunc {
 			return
 		}
 
-		c.Status(201)
+		c.Status(http.StatusCreated)
 	}
 }
 
@@ -45,7 +46,7 @@ func (h *TodoHandler) ReadAll() gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(200, todos)
+		c.JSON(http.StatusOK, todos)
 	}
 }
 
@@ -65,6 +66,6 @@ func (h *TodoHandler) ReadByID() gin.HandlerFunc {
 			return
 		}
 
-		c.JSON(200, todo)
+		c.JSON(http.StatusOK, todo)
 	}
 }
