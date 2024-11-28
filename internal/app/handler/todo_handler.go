@@ -69,3 +69,27 @@ func (h *TodoHandler) ReadByID() gin.HandlerFunc {
 		c.JSON(http.StatusOK, todo)
 	}
 }
+
+func (h *TodoHandler) Update() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var req dto.UpdateTodoRequest
+		if err := c.ShouldBindUri(&req); err != nil {
+			c.JSON(400, gin.H{"error": err.Error()})
+			return
+		}
+
+		if err := c.ShouldBindJSON(&req); err != nil {
+			c.JSON(400, gin.H{"error": err.Error()})
+			return
+		}
+
+		if err := h.s.Update(req); err != nil {
+			var errResp *response.ErrorResponse
+			errors.As(err, &errResp)
+			c.JSON(errResp.Code, errResp)
+			return
+		}
+
+		c.Status(http.StatusNoContent)
+	}
+}

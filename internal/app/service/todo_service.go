@@ -49,3 +49,22 @@ func (s *TodoService) ReadByID(req dto.ReadTodoByIDRequest) (*entity.Todo, error
 
 	return todo, nil
 }
+
+func (s *TodoService) Update(req dto.UpdateTodoRequest) error {
+	newTodo := &entity.Todo{
+		ID:    req.ID,
+		Title: req.Title,
+		Done:  req.Done,
+	}
+
+	if _, err := s.ReadByID(dto.ReadTodoByIDRequest{ID: req.ID}); err != nil {
+		return err
+	}
+
+	if err := s.r.Update(newTodo); err != nil {
+		log.Println("Error updating todo: ", err)
+		return response.NewErrorResponse(http.StatusInternalServerError, "something went wrong")
+	}
+
+	return nil
+}
