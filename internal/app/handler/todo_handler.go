@@ -52,7 +52,7 @@ func (h *TodoHandler) ReadAll() gin.HandlerFunc {
 
 func (h *TodoHandler) ReadByID() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		var req dto.ReadTodoByIDRequest
+		var req dto.TodoByIDRequest
 		if err := c.ShouldBindUri(&req); err != nil {
 			c.JSON(400, gin.H{"error": err.Error()})
 			return

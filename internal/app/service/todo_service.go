@@ -36,7 +36,7 @@ func (s *TodoService) ReadAll() ([]*entity.Todo, error) {
 	return todos, nil
 }
 
-func (s *TodoService) ReadByID(req dto.ReadTodoByIDRequest) (*entity.Todo, error) {
+func (s *TodoService) ReadByID(req dto.TodoByIDRequest) (*entity.Todo, error) {
 	todo, err := s.r.ReadByID(req.ID)
 	if err != nil {
 		if err.Error() == "record not found" {
@@ -57,7 +57,7 @@ func (s *TodoService) Update(req dto.UpdateTodoRequest) error {
 		Done:  req.Done,
 	}
 
-	if _, err := s.ReadByID(dto.ReadTodoByIDRequest{ID: req.ID}); err != nil {
+	if _, err := s.ReadByID(dto.TodoByIDRequest{ID: req.ID}); err != nil {
 		return err
 	}
 
