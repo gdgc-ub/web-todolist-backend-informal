@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"github.com/gdgc-ub/web-todolist-backend-informal/internal/entity"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
@@ -10,7 +11,7 @@ import (
 
 func autoMigrate(db *gorm.DB) error {
 	return db.AutoMigrate(
-	//TODO: Add entity models here
+		&entity.Todo{},
 	)
 }
 
