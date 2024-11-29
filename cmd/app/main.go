@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"log"
+	"os"
 )
 
 func main() {
@@ -36,5 +37,5 @@ func main() {
 	v1.PUT("/todos/:id", todoHandler.Update())
 	v1.DELETE("/todos/:id", todoHandler.Delete())
 
-	r.Run(":8080")
+	r.Run(":" + os.Getenv("APP_PORT"))
 }
